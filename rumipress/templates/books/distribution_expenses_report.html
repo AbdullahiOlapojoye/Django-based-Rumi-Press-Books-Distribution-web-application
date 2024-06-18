@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Distribution Expenses Report</title>
+</head>
+<body>
+    <h1>Distribution Expenses Report</h1>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Total Expenses</th>
+        </tr>
+        {% for item in report_data %}
+            <tr>
+                <td>{{ item.category }}</td>
+                <td>{{ item.total_expenses }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
