@@ -1,13 +1,15 @@
-# Django-based-Rumi-Press-Books-Distribution-web-application
-The team at Rumi Press is working on distributing high-tech books on behalf of their publishers. Their book categories include Business Analytics, Python, Data Science, Math, and more. So far, they have been using spreadsheets to track the book distribution process, but they want to migrate their process to a web-based application. 
+## Django-based-Rumi-Press-Books-Distribution-web-application
 
-# Project Objectives
-- Track book distribution expenses.  
-- Increase data security and availability. 
-- Customize and automate business processes.
+# Summary
+Developed a Django-based web application to automate the book distribution process for Rumi Press, enhancing efficiency and data security. The solution includes features like book category management, book information management, and expense tracking, leading to improved operational workflow.
+
+# Solution
+The solution achieved the project objectives by creating a robust web application that allows users to manage book categories and information efficiently. Implemented features include CRUD operations for book categories and books, data import from spreadsheets, and a detailed expenses report with a dynamic, interactive chart. The use of Django ensures high security and scalability.
 
 # Approach
-- I developed a CRUD* view to manage book categories (such as Business Analytics, Python, Data Science, and Math).
-- Developed a CRUD* view to add book information such as the title, the author, the publishing date, the book category, and the distribution expenses. 
-- Imported existing data from spreadsheets to the web app.
-- Developed a report view that enables the team to view the distribution expenses of books according to their categories. 
+- Created a Django project with models for book categories and books.
+- Implemented CRUD views and templates for managing book data.
+- Developed a custom management command to import book data from Excel.
+- Added user authentication to restrict access to editing features.
+- Integrated Highcharts to visualize expense data with a 3D doughnut chart.
+- Thoroughly tested the application to ensure functionality and user-friendliness.
