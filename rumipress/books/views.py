@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect # type: ignore
 from .models import BookCategory, Book
 from .forms import BookCategoryForm, BookForm
-from django.db.models import Sum
+from django.db.models import Sum # type: ignore
 
 # Book Category Views
 def book_category_list(request):
@@ -72,19 +72,11 @@ def book_delete(request, pk):
 def distribution_expenses_report(request):
     categories = BookCategory.objects.all()
     report_data = []
-
-    for category in categories:
-        total_expenses = Book.objects.filter(category=category).aggregate(Sum('distribution_expenses'))['distribution_expenses__sum']
-        report_data.append({'category': category.name, 'total_expenses': total_expenses})
-
-    return render(request, 'books/distribution_expenses_report.html', {'report_data': report_data})
-
-def distribution_expenses_report(request):
-    categories = BookCategory.objects.all()
-    report_data = []
-
     for category in categories:
         total_expenses = Book.objects.filter(category=category).aggregate(Sum('distribution_expense'))['distribution_expense__sum']
         report_data.append({'category': category.name, 'total_expenses': total_expenses})
 
     return render(request, 'books/distribution_expenses_report.html', {'report_data': report_data})
+
+def index(request):
+    return render(request, 'index.html')

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Distribution Expenses Report{% endblock %}
+
+{% block content %}
+<h1>Distribution Expenses Report</h1>
+
+<!-- Chart Container -->
+<div id="expensesChartContainer" style="height: 400px; width: 100%;"></div>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Total Expenses (in $)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in report_data %}
+        <tr>
+            <td>{{ item.category }}</td>
+            <td>${{ item.total_expenses|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Include Highcharts and Highcharts 3D module from CDN -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+
+<script>
+// Prepare data for the chart
+var categories = [
+    {% for item in report_data %}
+        "{{ item.category }}",
+    {% endfor %}
+];
+var expenses = [
+    {% for item in report_data %}
+        {{ item.total_expenses|floatformat:2 }},
+    {% endfor %}
+];
+
+// Create the chart
+Highcharts.chart('expensesChartContainer', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+        }
+    },
+    title: {
+        text: 'Distribution Expenses Report based on Book Category'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>${point.y:.2f}</b>'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,  // This makes it a doughnut chart
+            depth: 45,
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: ${point.y:.2f}'
+            }
+        }
+    },
+    series: [{
+        name: 'Total Expenses',
+        data: categories.map(function(category, index) {
+            return { name: category, y: expenses[index] };
+        })
+    }]
+});
+</script>
+{% endblock %}

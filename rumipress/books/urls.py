@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path # type: ignore
 from . import views
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('books/update/<int:pk>/', views.book_update, name='book_update'),
     path('books/delete/<int:pk>/', views.book_delete, name='book_delete'),
     path('report/', views.distribution_expenses_report, name='distribution_expenses_report'),
+    path('', views.index, name='index'),
 ]
 #urlpatterns += [
 ##    path('report/', views.distribution_expenses_report, name='distribution_expenses_report'),
